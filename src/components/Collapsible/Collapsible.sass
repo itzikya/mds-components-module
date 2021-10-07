@@ -1,0 +1,26 @@
+.MdsCollapsible
+    margin: 10px
+    padding: 20px 30px
+
+    &-color
+        &-primary
+            background-color: var(--color-nero-dark)
+        &-secondary
+            background-color: var(--color-nero)
+        &-tertiary
+            background-color: var(--color-black)
+
+    &-type
+        &-round
+            border-radius: 5px
+
+    &-header
+        display: flex
+        cursor: pointer
+        align-items: center
+
+    &-content.collapsed
+        display: none
+
+    &-content.expanded
+        display: block
