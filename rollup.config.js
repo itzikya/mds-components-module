@@ -5,7 +5,6 @@ import commonjs from '@rollup/plugin-commonjs';
 import postcss from 'rollup-plugin-postcss';
 import image from '@rollup/plugin-image';
 import url from 'postcss-url';
-import svg from 'rollup-plugin-svg-import';
 
 const packageJson = require('./package.json');
 
@@ -42,9 +41,5 @@ export default {
 			],
 		}),
 		image(),
-		svg({
-			// process SVG to DOM Node or String. Default: false
-			stringify: false,
-		}),
 	],
 };

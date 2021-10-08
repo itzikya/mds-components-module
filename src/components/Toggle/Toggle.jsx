@@ -18,6 +18,7 @@ function Toggle({ id, isChecked = false, onChange = () => {}, color = 'primary',
                    className='MdsToggle-input'
                    type='checkbox'
                    checked={isToggled}
+                   onChange={() => {}}
             />
             <label htmlFor={id}
                    className={labelClassName}
