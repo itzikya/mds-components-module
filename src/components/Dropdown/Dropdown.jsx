@@ -60,7 +60,7 @@ const styles = {
     }
 };
 
-function Dropdown({ classes, options=[], placeholder, onChange, disabled, error, helperText, style }) {
+function Dropdown({ classes, options = [], placeholder, onChange, disabled, error, helperText, style }) {
     let rootClass = classes.root;
     if(error) {
         rootClass = classes.rootError;
@@ -88,7 +88,7 @@ function Dropdown({ classes, options=[], placeholder, onChange, disabled, error,
                     <TextField
                         // error
                         {...params}
-                        // helperText={"hi there faggot"}
+                        // helperText={"hi there"}
                         placeholder={placeholder}
                         InputProps={{
                             ...params.InputProps,

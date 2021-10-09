@@ -9,7 +9,7 @@ function Toggle({ id, isChecked = false, onChange = () => {}, color = 'primary',
         setIsToggled(!isToggled);
         onChange();
     }
-    const className = `MdsCmp MdsToggle MdsToggle-color-${color} MdsToggle-size-${size} ${disabled ? 'MdsInput-disabled' : ""}`;
+    const className = `MdsCmp MdsInput MdsToggle MdsToggle-color-${color} MdsToggle-size-${size} ${disabled ? 'MdsInput-disabled' : ""}`;
     const labelClassName = `toggle MdsToggle-color-${color}`;
 
     return (
