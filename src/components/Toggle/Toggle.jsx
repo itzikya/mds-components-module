@@ -1,7 +1,7 @@
 import './Toggle.sass';
 import '../../styles.sass';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 function Toggle({ id, isChecked = false, onChange = () => {}, color = 'primary', size = 'large', disabled, style }) {
     const [isToggled, setIsToggled] = useState(isChecked);
@@ -9,6 +9,11 @@ function Toggle({ id, isChecked = false, onChange = () => {}, color = 'primary',
         setIsToggled(!isToggled);
         onChange();
     }
+
+    useEffect(() => {
+        setIsToggled(isChecked)
+    }, [isChecked])
+
     const className = `MdsCmp MdsInput MdsToggle MdsToggle-color-${color} MdsToggle-size-${size} ${disabled ? 'MdsInput-disabled' : ""}`;
     const labelClassName = `toggle MdsToggle-color-${color}`;
 

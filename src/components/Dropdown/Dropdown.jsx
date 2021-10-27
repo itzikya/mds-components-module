@@ -2,7 +2,7 @@ import './Dropdown.sass';
 import '../../styles.sass';
 import Label from '../Label/Label.jsx';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import TextField from '@material-ui/core/TextField';
 import { withStyles } from '@material-ui/core/styles';
@@ -69,6 +69,12 @@ function Dropdown({ classes, options = [], placeholder, onChange, disabled, erro
         rootClass = classes.rootDisabled;
     }
 
+    const [currentPlaceholder, setCurrentPlaceholder] = useState(placeholder);
+
+    useEffect(() => {
+        setCurrentPlaceholder(placeholder);
+    }, [placeholder])
+
     return (
         <div className='MdsCmp drop-down-container'>
             <Autocomplete
@@ -89,7 +95,7 @@ function Dropdown({ classes, options = [], placeholder, onChange, disabled, erro
                         // error
                         {...params}
                         // helperText={"hi there"}
-                        placeholder={placeholder}
+                        placeholder={currentPlaceholder}
                         InputProps={{
                             ...params.InputProps,
                             disableUnderline: true,

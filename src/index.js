@@ -10,3 +10,4 @@ export { default as Label } from './components/Label/Label.jsx';
 // export { default as RemoveButton } from './componentsRemoveButton/RemoveButton.jsx';
 // export { default as ScreenFiller } from './components/ScreenFiller/ScreenFiller.jsx';
 export { default as Toggle } from './components/Toggle/Toggle.jsx';
+export { default as Textfield } from './components/Textfield/Textfield.jsx';

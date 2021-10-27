@@ -5,9 +5,9 @@
   "dependencies": {
     "cra-template": "1.1.2",
     "mds-components-module": "file:..",
-    "react": "file:../../../../../node_modules/react",
-    "react-dom": "file:../../../../../node_modules/react-dom",
-    "react-scripts": "file:../../../../../node_modules/react-scripts"
+    "react": "file:../node_modules/react",
+    "react-dom": "file:../node_modules/react-dom",
+    "react-scripts": "file:../node_modules/react-scripts"
   },
   "scripts": {
     "start": "react-scripts start",
