@@ -60,7 +60,7 @@ const styles = {
     }
 };
 
-function Dropdown({ classes, options = [], placeholder, onChange, disabled, error, helperText, style }) {
+function Dropdown({ classes, options = [], placeholder, value = '', onChange, disabled, error, helperText, style }) {
     let rootClass = classes.root;
     if(error) {
         rootClass = classes.rootError;
@@ -70,10 +70,15 @@ function Dropdown({ classes, options = [], placeholder, onChange, disabled, erro
     }
 
     const [currentPlaceholder, setCurrentPlaceholder] = useState(placeholder);
+    const [currentValue, setCurrentValue] = useState(value);
 
     useEffect(() => {
         setCurrentPlaceholder(placeholder);
     }, [placeholder])
+
+    useEffect(() => {
+        setCurrentValue(value);
+    }, [value])
 
     return (
         <div className='MdsCmp drop-down-container'>
@@ -89,12 +94,10 @@ function Dropdown({ classes, options = [], placeholder, onChange, disabled, erro
                 options={options}
                 onInputChange={onChange}
                 style={style}
-                // getOptionLabel={option => option.text}
+                value={currentValue}
                 renderInput={(params) =>
                     <TextField
-                        // error
                         {...params}
-                        // helperText={"hi there"}
                         placeholder={currentPlaceholder}
                         InputProps={{
                             ...params.InputProps,
