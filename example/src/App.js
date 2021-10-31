@@ -28,7 +28,7 @@ function App() {
 				<Button text='test' onClick={()=>console.log('hi')}/>
 				<Dropdown value={value} placeholder={"Hadar"} options={['hadar', 'hadar!', 'hadar!!', 'lior']}/>
 			</Collapsible>
-			<Textfield onChange={(e) => {alert(e.target.value)}} />
+			<Textfield value={value} placeholder={"test"} onChange={(e) => {debugger; {console.log(e.target.value)}}} />
 			<Dropdown value={value} placeholder={"Hadar"} options={['hadar', 'hadar!', 'hadar!!', 'lior']}/>
 			<Counter id="hlp" onChange={onChangeFunc} addition={0.00001} error helperText="good"/>
 		</div>
