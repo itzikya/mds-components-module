@@ -5,7 +5,7 @@ import UP_ARROW from '../../assets/arrow-up-lg.svg';
 
 import React, { useState, useEffect } from 'react';
 
-function Collapsible({ children, isCollapse = true, type = 'round', color = 'primary' }) {
+function Collapsible({ children, onChange = () => {}, isCollapse = true, type = 'round', color = 'primary' }) {
     const [isCollapsed, setIsCollapsed] = useState(isCollapse);
     const collapsibleClassName = `MdsCmp MdsCollapsible MdsCollapsible-type-${type} MdsCollapsible-color-${color}`;
     const collapsibleHeaderClassName = 'MdsCollapsible-header';
@@ -20,6 +20,7 @@ function Collapsible({ children, isCollapse = true, type = 'round', color = 'pri
         const elm = e.target;
         if(elm.className === collapsibleClassName || elm.className === collapsibleHeaderClassName || elm.className === openIndicatorClassName) {
             setIsCollapsed(!isCollapsed)
+            onChange({target: {value: isCollapsed}})
         }
     }
 

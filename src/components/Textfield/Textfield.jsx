@@ -1,10 +1,11 @@
 import './Textfield.sass';
 import '../../styles.sass';
+import Label from '../Label/Label.jsx';
 
 import React, { useState, useEffect } from 'react';
 
-function Textfield({ disabled, onChange = () => {}, id, placeholder, value, style }) {
-    const className = `MdsCmp MdsTextfield ${disabled ? 'MdsInput-disabled' : ""}`
+function Textfield({ disabled, onChange = () => {}, id, placeholder, helperText, error, value, style }) {
+    const className = `MdsCmp MdsTextfield ${error ? 'MdsTextfield-error' : ''} ${disabled ? 'MdsInput-disabled' : ""}`
 
     const [val, setVal] = useState(value);
     const [holder, setHolder] = useState(placeholder);
@@ -23,7 +24,12 @@ function Textfield({ disabled, onChange = () => {}, id, placeholder, value, styl
     }
 
     return (
-        <input className={className} id={id} value={val} placeholder={holder} onChange={handleChange} style={style} />
+        <div>
+            <input className={className} id={id} value={val} placeholder={holder} onChange={handleChange} style={style}/>
+            <Label color='invalid' size='small'>
+                {error && helperText}
+            </Label>
+        </div>
     );
 }
 
