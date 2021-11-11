@@ -1,21 +1,22 @@
 import './Counter.sass';
 import '../../styles.sass';
 import Label from '../Label/Label.jsx';
+import Button from '../Button/Button.jsx';
 
 import React, { useEffect, useState } from 'react';
 
-const Counter = ({ onChange = () => {}, id, addition = 1, placeholder = 0, error, helperText, disabled, color = 'primary', style }) => {
-    const [value, setValue] = useState(placeholder);
+const Counter = ({ onChange = () => {}, id, addition = 1, value = 0, error, helperText, disabled, color = 'primary', style }) => {
+    const [newValue, setNewValue] = useState(value);
     const className = `MdsCmp MdsCounter MdsCounter-color-${color} ${error ? 'MdsCounter-error' : ''} ${disabled ? 'MdsInput-disabled' : ''}`;
 
     useEffect(() => { 
-        setValue(placeholder);
-    }, [placeholder])
+        setNewValue(value);
+    }, [value])
 
     const handleClick = (operator) => {
         const operation = {
-            '+': value + addition,
-            '-': value - addition,
+            '+': newValue + addition,
+            '-': newValue - addition,
         }
         
         const newVal = Math.round((operation[operator]) * 1e12) / 1e12; 
@@ -32,23 +33,24 @@ const Counter = ({ onChange = () => {}, id, addition = 1, placeholder = 0, error
     }
 
     const onCounterChange = (e) => {
-        setValue(Number(e.target.value));
+        setNewValue(Number(e.target.value));
         onChange(e);
+    }
+
+    const buttonStyle = {
+        color: 'var(--color-black)',
+        borderRadius: '50px',
+        margin: '10px',
+        width: '20px',
+        backgroundColor: 'white'
     }
 
     return (
         <div className='MdsCounter-container'>
             <div className={className} style={style}>
-                <button className='MdsCounter-button' onClick={() => handleClick('-')}>
-                    -
-                </button>
-                <input id={id} value={value} onChange={onCounterChange}/>
-                {/* <Label id={id} onChange={onChange} color='secondary'>
-                    {value}
-                </Label> */}
-                <button className='MdsCounter-button' onClick={() => handleClick('+')}>
-                    +
-                </button>
+                <Button text='-' onClick={() => handleClick('-')} type='text' style={buttonStyle}/>
+                <input id={id} value={newValue} onChange={onCounterChange}/>
+                <Button text='+' onClick={() => handleClick('+')} type='text' style={buttonStyle}/>
             </div>
             <Label color='invalid' size='small'>
                 {error && helperText}

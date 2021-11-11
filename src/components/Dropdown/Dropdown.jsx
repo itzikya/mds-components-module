@@ -15,7 +15,7 @@ const root = {
     borderRadius: 25,
     display: 'flex',
     alignItems: 'center',
-    width: 190
+    width: 190,
 }
 
 const styles = {
