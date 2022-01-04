@@ -1,5 +1,4 @@
 import './Counter.sass';
-import '../../styles.sass';
 import Label from '../Label/Label.jsx';
 import Button from '../Button/Button.jsx';
 
@@ -9,7 +8,7 @@ const Counter = ({ onChange = () => {}, id, addition = 1, value = 0, error, help
     const [newValue, setNewValue] = useState(value);
     const className = `MdsCmp MdsCounter MdsCounter-color-${color} ${error ? 'MdsCounter-error' : ''} ${disabled ? 'MdsInput-disabled' : ''}`;
 
-    useEffect(() => { 
+    useEffect(() => {
         setNewValue(value);
     }, [value])
 
@@ -18,8 +17,8 @@ const Counter = ({ onChange = () => {}, id, addition = 1, value = 0, error, help
             '+': newValue + addition,
             '-': newValue - addition,
         }
-        
-        const newVal = Math.round((operation[operator]) * 1e12) / 1e12; 
+
+        const newVal = Math.round((operation[operator]) * 1e12) / 1e12;
         setNativeInput(newVal);
     }
 
@@ -27,8 +26,8 @@ const Counter = ({ onChange = () => {}, id, addition = 1, value = 0, error, help
         const input = document.querySelector(`#${id}`);
 
         Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value')
-          .set.call(input, newVal);
-    
+              .set.call(input, newVal);
+
         input.dispatchEvent(new Event('change', { bubbles: true }));
     }
 
@@ -48,9 +47,9 @@ const Counter = ({ onChange = () => {}, id, addition = 1, value = 0, error, help
     return (
         <div className='MdsCounter-container'>
             <div className={className} style={style}>
-                <Button text='-' onClick={() => handleClick('-')} type='text' style={buttonStyle}/>
+                <Button text='-' onClick={() => handleClick('-')} type='text' buttonStyle={buttonStyle}/>
                 <input id={id} value={newValue} onChange={onCounterChange}/>
-                <Button text='+' onClick={() => handleClick('+')} type='text' style={buttonStyle}/>
+                <Button text='+' onClick={() => handleClick('+')} type='text' buttonStyle={buttonStyle}/>
             </div>
             <Label color='invalid' size='small'>
                 {error && helperText}

@@ -1,10 +1,9 @@
 import './Checkbox.sass';
-import '../../styles.sass';
 
 import React, { useState } from 'react';
 
 function Checkbox({ id, isChecked, onClick = () => {}, disabled, style }) {
-    const className = `MdsCmp MdsInput MdsCheckbox ${disabled ? 'MdsInput-disabled' : ""}`;
+    const className = `MdsCmp MdsInput MdsCheckbox ${disabled ? 'MdsInput-disabled' : ''}`;
 
     const [checked, setChecked] = useState(isChecked);
 
@@ -17,14 +16,13 @@ function Checkbox({ id, isChecked, onClick = () => {}, disabled, style }) {
             <input id={id}
                    className='MdsCheckbox-input'
                    type='checkbox'
-                   checked={checked}
+                   checked={isChecked}
                    onChange={() => {}}
             />
             <label htmlFor={id}
                    className='checker'
                    onClick={handleClick}
             />
-            {/*<span className='grid-row-checkmark'/>*/}
         </div>
     );
 }

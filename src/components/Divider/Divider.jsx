@@ -1,5 +1,4 @@
 import './Divider.sass';
-import '../../styles.sass';
 
 import React from 'react';
 

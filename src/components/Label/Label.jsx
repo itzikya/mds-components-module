@@ -1,5 +1,4 @@
 import './Label.sass';
-import '../../styles.sass';
 
 import React from 'react';
 
