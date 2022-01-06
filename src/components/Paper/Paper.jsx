@@ -1,4 +1,5 @@
 import './Paper.sass';
+import '../../styles.sass';
 import React from 'react';
 
 function Paper({children, className = 'main-screen-container'}) {

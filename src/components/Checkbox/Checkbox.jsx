@@ -1,4 +1,5 @@
 import './Checkbox.sass';
+import '../../styles.sass';
 
 import React, { useState } from 'react';
 

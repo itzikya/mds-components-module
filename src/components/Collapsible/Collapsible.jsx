@@ -1,4 +1,5 @@
 import './Collapsible.sass';
+import '../../styles.sass';
 import DOWN_ARROW from '../../assets/arrow-down-lg.svg';
 import UP_ARROW from '../../assets/arrow-up-lg.svg';
 

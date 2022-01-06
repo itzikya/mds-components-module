@@ -1,4 +1,5 @@
 import './Modal.sass';
+import '../../styles.sass';
 import Button from '../Button/Button.jsx';
 
 import React from 'react';

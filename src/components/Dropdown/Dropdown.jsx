@@ -1,4 +1,5 @@
 import './Dropdown.sass';
+import '../../styles.sass';
 import Label from '../Label/Label.jsx';
 
 import React, { useState, useEffect } from 'react';

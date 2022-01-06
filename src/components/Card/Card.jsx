@@ -1,4 +1,5 @@
 import './Card.sass';
+import '../../styles.sass';
 
 import React from 'react';
 import Button from '../Button/Button.jsx';

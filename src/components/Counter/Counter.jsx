@@ -1,4 +1,5 @@
 import './Counter.sass';
+import '../../styles.sass';
 import Label from '../Label/Label.jsx';
 import Button from '../Button/Button.jsx';
 

@@ -1,4 +1,5 @@
 import './Toggle.sass';
+import '../../styles.sass';
 
 import React, { useEffect, useState } from 'react';
 

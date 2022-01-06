@@ -1,4 +1,5 @@
 import './Container.sass';
+import '../../styles.sass';
 import Label from '../Label/Label.jsx';
 
 import React from 'react';

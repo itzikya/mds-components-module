@@ -1,4 +1,5 @@
 import './Button.sass';
+import '../../styles.sass';
 import Label from '../Label/Label.jsx';
 import AddIcon from '../../assets/add-icon.svg';
 import ExitIcon from '../../assets/exit-icon.svg';
