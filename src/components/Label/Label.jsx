@@ -3,11 +3,11 @@ import '../../styles.sass';
 
 import React from 'react';
 
-function Label({ children, color = 'primary', id, size = 'large', position = 'start', style }) {
-    const className = `MdsCmp MdsLabel MdsLabel-color-${color} MdsLabel-size-${size} MdsLabel-position-${position}`;
+function Label({ children, color = 'primary', id, size = 'large', position = 'start', style, onClick }) {
+    const className = `MdsCmp MdsLabel MdsLabel-color-${color} MdsLabel-size-${size} MdsLabel-position-${position}` ;
 
     return (
-        <div id={id} className={className} style={style}>
+        <div id={id} className={className} onClick={onClick} style={style}>
             {children}
         </div>
     );

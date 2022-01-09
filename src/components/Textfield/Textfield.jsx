@@ -25,7 +25,7 @@ function Textfield({ disabled, type = '', onChange = () => {}, id, placeholder, 
 
     return (
         <>
-            <input className={className} id={id} value={val} placeholder={holder} onChange={handleChange} {...other}/>
+            <input className={className} id={id} value={value} placeholder={holder} disabled={disabled} onChange={handleChange} {...other}/>
             <Label color='invalid' size='small'>
                 {error && helperText}
             </Label>
