@@ -98,6 +98,7 @@ function Dropdown({ classes, id, placeholder, loading, value, onChange, disabled
                     input: classes.input,
                     loading: classes.loading,
                 }}
+                disabled={disabled}
                 {...other}
                 onOpen={(e) => {
                     onOpen(e, id, type)
@@ -107,12 +108,14 @@ function Dropdown({ classes, id, placeholder, loading, value, onChange, disabled
                 }}
                 loading={loading}
                 onInputChange={onChange}
-                defaultValue={value}
+                value={value}
                 getOptionSelected={()=>true}
                 renderInput={(params) =>
                     <TextField
                         {...params}
+                        disabled={disabled}
                         placeholder={currentPlaceholder}
+                        value={value}
                         InputProps={{
                             ...params.InputProps,
                             disableUnderline: true,
