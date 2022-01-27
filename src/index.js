@@ -6,6 +6,7 @@ export { default as Container } from './components/Container/Container.jsx';
 export { default as Counter } from './components/Counter/Counter.jsx';
 export { default as Divider } from './components/Divider/Divider.jsx';
 export { default as Dropdown } from './components/Dropdown/Dropdown.jsx';
+export { default as MultiDropdown } from './components/Dropdown/MultiDropdown.jsx';
 export { default as Label } from './components/Label/Label.jsx';
 // export { default as ScreenFiller } from './components/ScreenFiller/ScreenFiller.jsx';
 export { default as Toggle } from './components/Toggle/Toggle.jsx';

@@ -1,5 +1,7 @@
 import './Counter.sass';
 import '../../styles.sass';
+import MinusIcon from '../../assets/minus.svg';
+import PlusIcon from '../../assets/plus.svg';
 import Label from '../Label/Label.jsx';
 import Button from '../Button/Button.jsx';
 
@@ -158,11 +160,7 @@ const Counter = ({ onChange = () => {}, id, addition = 1, value = 0, error, min,
     
 
     const buttonStyle = {
-        color: 'var(--color-black)',
-        borderRadius: '50px',
-        margin: '10px',
-        width: '20px',
-        backgroundColor: 'white'
+      marginTop: '3px'
     }
     const dispValue=()=>{
         if(mouseDown[id]===undefined){
@@ -206,11 +204,16 @@ const Counter = ({ onChange = () => {}, id, addition = 1, value = 0, error, min,
     return (
         <div className='MdsCounter-container'>
             <div className={className} style={style}>
-                <Button text='-' onMouseDown={()=>handleMouseDown('-')} onMouseUp={()=>handleMouseUp()} onMouseOut={()=>handleMouseOut()}
-                onClick={() => handleClick('-')} type='text' buttonStyle={buttonStyle}/>
-                <input id={id} value={dispValue()} onBlur={handleLostFocus} onChange={onCounterChange}/>
-                <Button text='+' onMouseDown={()=>handleMouseDown('+')} onMouseUp={()=>handleMouseUp()} onMouseOut={()=>handleMouseOut()}
-                onClick={() => handleClick('+')} type='text' buttonStyle={buttonStyle}/>
+                <Button onMouseDown={()=>handleMouseDown('-')} onMouseUp={()=>handleMouseUp()} onMouseOut={()=>handleMouseOut()}
+                onClick={() => handleClick('-')} type='icon' icon={MinusIcon} buttonStyle={buttonStyle}/>
+                <input id={id} value={dispValue()} onBlur={handleLostFocus} onChange={onCounterChange} onKeyDown={(e)=>{
+                  if(e.code==='Enter'){
+                    var input = document.querySelector(`#${id}`);
+                    if(input!==null)
+                      input.blur()
+                  }}}/>
+                <Button onMouseDown={()=>handleMouseDown('+')} onMouseUp={()=>handleMouseUp()} onMouseOut={()=>handleMouseOut()}
+                onClick={() => handleClick('+')} type='icon' icon={PlusIcon}  buttonStyle={buttonStyle}/>
             </div>
             <Label color='invalid' size='small'>
                 {error && helperText}
