@@ -164,7 +164,7 @@ function MultiDropdown({ classes, id, loading, value, onChange, maxSelLen, disab
                 {value.length>0?value.join(', '):''}
                 </div>}}
                 renderOption={(option) => {
-                return <div style={{display:'flex',flexDirection:'row',alignItems:'center'}}>
+                return <div style={{display:'flex',flexDirection:'row',alignItems:'center',height:'23px'}}>
                   <WhiteCheckbox checked={value.includes(option)}/>
                   {option}
                   </div>
