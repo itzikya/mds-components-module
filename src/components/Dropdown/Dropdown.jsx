@@ -146,7 +146,7 @@ function Dropdown({ classes, id, placeholder, loading, value, onChange, disabled
                 loading={loading}
                 onInputChange={onChange}
                 value={value}
-                getOptionSelected={(opt,val) => val===''?false:val===opt}
+                getOptionSelected={(opt,val) =>val.length===0?true:opt===val}
                 renderInput={(params) =>
                     <TextField
                         {...params}

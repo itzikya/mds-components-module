@@ -6,61 +6,47 @@ import Label from '../Label/Label.jsx';
 import Button from '../Button/Button.jsx';
 
 import React, { useEffect, useState } from 'react';
-
 const Counter = ({ onChange = () => {}, id, addition = 1, value = 0, error, min, max, decimalPrecision, helperText, disabled, color = 'primary', style }) => {
     const [newValue, setNewValue] = useState(value);
+    const [tid, settid] = useState(null);
     const className = `MdsCmp MdsCounter MdsCounter-color-${color} ${error ? 'MdsCounter-error' : ''} ${disabled ? 'MdsInput-disabled' : ''}`;
 
     const dp=parseInt(decimalPrecision)
     useEffect(() => {
         setNewValue(value);
     }, [value])
-
-    const mouseDown={}
-    const repeat={}
-    const tid={}
     
-    const repeatOp=function repeatOp(op){
-        tid[id]=setTimeout(()=>{
-          if(!repeat[id])
-            return
-        handleClick(op,false)
-        repeatOp(op)},200)
-      }
-
-      const handleMouseDown = function handleMouseDown(op){
-        mouseDown[id]=true
-        repeat[id]=true
-        repeatOp(op)
-      }
+    const handleMouseDown = function handleMouseDown(op){
+      if(tid!==null){  
+        clearInterval(tid)
+        settid(null)
+      }  
+      settid(setInterval(()=>handleClick(op,false),200))
+    }
     
-      const handleMouseUp = function handleMouseUp(){
-        if(mouseDown[id]===false)
-          return
-        if(tid[id]!==undefined)  
-          clearTimeout(tid[id])  
-        mouseDown[id]=false
-        repeat[id]=false
-        var input = document.querySelector(`#${id}`)
-        setNativeInput(input.value)
-      }
+    const handleMouseUp = function handleMouseUp(){
+      if(tid!==null){  
+        clearInterval(tid)
+        settid(null)
+      }  
+      var input = document.querySelector(`#${id}`)
+      setNativeInput(input.value)
+    }
     
     const handleMouseOut = function handleMouseOut(){
-        if(mouseDown[id]===false)
-          return
-        if(tid[id]!==undefined)  
-          clearTimeout(tid[id])  
-        mouseDown[id]=false  
-        repeat[id]=false
+      if(tid!==null){  
+        clearInterval(tid)
+        settid(null)
+      }  
         var input = document.querySelector(`#${id}`)
         setNativeInput(input.value)
       }
     
       const handleClick = function handleClick(operator,dispatch=true) {
-        let val=Number(newValue)
-        if(!dispatch){
-          var input = document.querySelector(`#${id}`);
-          val=Number(input.value)
+       let val=Number(newValue)
+       if(!dispatch){
+         var input = document.querySelector(`#${id}`);
+         val=Number(input.value)
         }
 
         const operation = {
@@ -163,20 +149,14 @@ const Counter = ({ onChange = () => {}, id, addition = 1, value = 0, error, min,
       marginTop: '3px'
     }
     const dispValue=()=>{
-        if(mouseDown[id]===undefined){
-          mouseDown[id]=false
-        }
-        if(repeat[id]===undefined){
-          repeat[id]=false
-        }
-        let val=newValue.toString()
-        var input = document.querySelector(`#${id}`);
-        if(input!==null && dp>0 && val.length>0 && val+'.'===input.value && val!=='.')
-          return input.value
-        if(input!==null && val.length>0 && val+'-'===input.value && val!=='-')
-          return input.value
-        return val
-      }
+      let val=newValue.toString()
+      var input = document.querySelector(`#${id}`);
+      if(input!==null && dp>0 && val.length>0 && val+'.'===input.value && val!=='.')
+        return input.value
+      if(input!==null && val.length>0 && val+'-'===input.value && val!=='-')
+        return input.value
+      return val
+    }
 
       const handleLostFocus= function (){
         if(dp>0){
