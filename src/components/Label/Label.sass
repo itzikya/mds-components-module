@@ -2,11 +2,11 @@
   display: flex
   white-space: nowrap
   align-items: center
-  user-select: none;
+  user-select: none
 
   &-color
     &-primary
-      color: var(--color-dark-gray)
+      color: var(--color-dusty-gray)
     &-secondary
       color: var(--color-white)
     &-valid
@@ -33,3 +33,8 @@
       justify-content: center
     &-end
       justify-content: end
+    &-space-between
+      justify-content: space-between
+    &-disabled
+      pointer-events: none
+      opacity: 0.5
