@@ -7,6 +7,8 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import TextField from '@material-ui/core/TextField';
 import { withStyles } from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import Checkbox from '@material-ui/core/Checkbox';
+import Typography from '@material-ui/core/Typography';
 
 const white = 'var(--color-white)';
 const black = 'var(--color-black)';
@@ -17,12 +19,29 @@ const root = {
     height: 40,
     borderRadius: 25,
     display: 'flex',
-    alignItems: 'center'
+    alignItems: 'center',
+    width: 190,
 }
+
+const WhiteTypography = withStyles({
+    root: {
+        color: "#ffffff"
+    }
+})((props) => <Typography {...props} />);
+
+const WhiteCheckbox = withStyles({
+    root: {
+        color: "#ffffff",
+        "&$checked": {
+            color: "#ffffff"
+        }
+    },
+    checked: {}
+})((props) => <Checkbox color="default" {...props} />);
 
 const styles = {
     root: {
-        ...root
+        ...root,
     },
     rootDisabled: {
         ...root,
@@ -44,15 +63,10 @@ const styles = {
         marginRight: 10
     },
     listbox: {
-        '& .MuiListItem-root.Mui-selected': {
-            backgroundColor: "#ffff00",
-            color: "#ff00",
-            fontWeight: 600
-        },
-        color: white,
-        backgroundColor: black,
+        color: '#ffffff',
+        backgroundColor: '#000000',
         '& li[data-focus="true"]': {
-            backgroundColor: 'var(--color-nero)',
+            backgroundColor: '#8D8E8D',
             cursor: 'pointer',
         },
         '&::-webkit-scrollbar': {
@@ -72,8 +86,8 @@ const styles = {
         }
     },
     noOptions: {
-        color: white,
-        backgroundColor: black,
+        color: '#ffffff',
+        backgroundColor: '#000000'
     },
     input: {
         color: white,
@@ -92,37 +106,31 @@ const styles = {
     },
     svg: {
         color: white
-    }
+    },
 };
 
-function Dropdown({ classes, id, placeholder, loading, value = '', onChange, disabled, disableClearable, error, helperText, onOpen=()=>{}, onClose=()=>{}, type, ...other }) {
+function MultiDropdown({ classes, id, loading, value, onChange, maxSelLen, disabled, error, helperText, onOpen=()=>{}, onClose=()=>{}, type, ...other }) {
     let rootClass = classes.root;
-
-    if (error && disabled) {
+    if(error && disabled)
         rootClass = classes.rootDisabledError;
-    } else if (error) {
+    else if(error) {
         rootClass = classes.rootError;
-    } else if (disabled) {
+    }
+    else if(disabled) {
         rootClass = classes.rootDisabled;
     }
-
-    const [currentValue, setCurrentValue] = useState(value);
-    const [currentPlaceholder, setCurrentPlaceholder] = useState(placeholder);
-
-    useEffect(() => {
-        setCurrentValue(value);
-    }, [value]);
-
-    useEffect(() => {
-        setCurrentPlaceholder(placeholder);
-    }, [placeholder]);
-
+    const setOnChange=function (e,v){
+        if(v.length>maxSelLen)
+            return
+        onChange(id,v)
+    }
     return (
         <div className='MdsCmp drop-down-container'>
             <Autocomplete
                 id={id}
-                disableClearable={disableClearable}
-                selectOnFocus
+                disableClearable
+                multiple
+                disableCloseOnSelect
                 classes={{
                     inputRoot: classes.inputRoot,
                     root: rootClass,
@@ -132,6 +140,15 @@ function Dropdown({ classes, id, placeholder, loading, value = '', onChange, dis
                     input: classes.input,
                     loading: classes.loading,
                 }}
+                // onKeyDown={(e)=>{
+                //     if(e.code==='Enter'){
+                //       e.preventDefault()
+                //       var input = document.querySelector(`#${id}`);
+                //       if(input!==null){
+                //         setOnChange(e,value)
+                //         input.blur()
+                //         }
+                //     }}}
                 disabled={disabled}
                 {...other}
                 onOpen={(e) => {
@@ -140,25 +157,23 @@ function Dropdown({ classes, id, placeholder, loading, value = '', onChange, dis
                 onClose={(e) => {
                     onClose(e, id, type)
                 }}
-                onKeyDown={(e)=>{
-                    if(e.code==='Enter'){
-                        var input = document.querySelector(`#${id}`);
-                        if(input!==null) {
-                            input.blur()
-                            input.focus()
-                        }
-                    }}
-                }
                 loading={loading}
-                onInputChange={onChange}
-                value={currentValue}
-                getOptionSelected={(opt,val) =>val.length===0?true:opt===val}
+                value={value}
+                onChange={setOnChange}
+                renderTags={(value) => { return <div disabled={disabled} style={{display:'flex',flexDirection:'row',alignItems:'center',color:'#ffffff',paddingLeft:'10px'}}>
+                    {value.length>0?value.join(', '):''}
+                </div>}}
+                renderOption={(option) => {
+                    return <div style={{display:'flex',flexDirection:'row',alignItems:'center',height:'23px'}}>
+                        <WhiteCheckbox checked={value.includes(option)}/>
+                        {option}
+                    </div>
+                }}
                 renderInput={(params) =>
                     <TextField
+                        id={`${id}TF`}
                         {...params}
                         disabled={disabled}
-                        placeholder={currentPlaceholder}
-                        value={currentValue}
                         InputProps={{
                             ...params.InputProps,
                             disableUnderline: true,
@@ -172,11 +187,11 @@ function Dropdown({ classes, id, placeholder, loading, value = '', onChange, dis
                     />}
 
             />
-            <Label color='invalid' size='small' disabled={disabled}>
+            <Label color="invalid" size="small" disabled={disabled}>
                 {error && helperText}
             </Label>
         </div>
     );
 }
 
-export default withStyles(styles)(Dropdown);
+export default withStyles(styles)(MultiDropdown);

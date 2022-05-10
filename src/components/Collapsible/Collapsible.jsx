@@ -5,8 +5,9 @@ import UP_ARROW from '../../assets/arrow-up-lg.svg';
 
 import React, { useState, useEffect } from 'react';
 
-function Collapsible({ children, onChange = () => {}, closeable = true, isCollapse = true, type = 'round', color = 'primary', headerStyle, contentStyle, ...other}) {
+function Collapsible({children, onChange = () => {}, closeable = true, isCollapse = true, type = 'round', color = 'primary', onClick = () => {}, headerStyle, contentStyle, ...other}) {
     const [isCollapsed, setIsCollapsed] = useState(isCollapse);
+
     const collapsibleClassName = `MdsCmp MdsCollapsible MdsCollapsible-type-${type} MdsCollapsible-color-${color}`;
     const collapsibleHeaderClassName = 'MdsCollapsible-header';
     const collapsibleContentClassName = `MdsCollapsible-content ${isCollapsed ? 'collapsed' : 'expanded'}`;
@@ -14,20 +15,23 @@ function Collapsible({ children, onChange = () => {}, closeable = true, isCollap
 
     useEffect(() => {
         setIsCollapsed(isCollapse)
-    }, [isCollapse])
+    }, [isCollapse]);
 
     const onCollapsibleClick = (e) => {
         const elm = e.target;
+
         if(elm.className === collapsibleClassName || elm.className === collapsibleHeaderClassName || elm.className === openIndicatorClassName) {
             setIsCollapsed(!isCollapsed)
             onChange({target: {value: isCollapsed}})
         }
+
+        onClick();
     }
 
     return (
         <div className={collapsibleClassName} {...other}>
-            <div className={collapsibleHeaderClassName} style={headerStyle}>
-                {closeable && <img className={openIndicatorClassName} onClick={onCollapsibleClick} alt='' src={isCollapsed ? DOWN_ARROW : UP_ARROW}/>}
+            <div className={collapsibleHeaderClassName} onClick={onCollapsibleClick} style={headerStyle}>
+                {closeable && <img className={openIndicatorClassName} alt='' src={isCollapsed ? DOWN_ARROW : UP_ARROW}/>}
                 {children && children[0] ? children[0] : null}
             </div>
             <div className={collapsibleContentClassName}
