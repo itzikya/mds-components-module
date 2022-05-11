@@ -30,8 +30,8 @@ function Collapsible({children, onChange = () => {}, closeable = true, isCollaps
 
     return (
         <div className={collapsibleClassName} {...other}>
-            <div className={collapsibleHeaderClassName} onClick={onCollapsibleClick} style={headerStyle}>
-                {closeable && <img className={openIndicatorClassName} alt='' src={isCollapsed ? DOWN_ARROW : UP_ARROW}/>}
+            <div className={collapsibleHeaderClassName} style={headerStyle}>
+                {closeable && <img className={openIndicatorClassName} onClick={onCollapsibleClick} alt='' src={isCollapsed ? DOWN_ARROW : UP_ARROW}/>}
                 {children && children[0] ? children[0] : null}
             </div>
             <div className={collapsibleContentClassName}

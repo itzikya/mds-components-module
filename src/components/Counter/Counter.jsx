@@ -1,5 +1,7 @@
 import './Counter.sass';
 import '../../styles.sass';
+import MinusIcon from '../../assets/minus.svg';
+import PlusIcon from '../../assets/plus.svg';
 import Label from '../Label/Label.jsx';
 import Button from '../Button/Button.jsx';
 

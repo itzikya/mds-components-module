@@ -41,7 +41,7 @@ const Button = ({ text, icon, orientation = 'horizontal', disabled, color = 'pri
     }
 
     return (
-        <div className={`MdsButton-Container MdsButton-orientation-${orientation}`} style={style} onClick={onClick}>
+        <div className={`MdsButton-Container MdsButton-orientation-${orientation}`} style={style} onClick={disabled ? () => {} : onClick}>
             <button className={className} disabled={disabled}  style={buttonStyle} {...other}>
                 {renderButtonType()}
             </button>
