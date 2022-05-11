@@ -17,13 +17,12 @@ const root = {
     height: 40,
     borderRadius: 25,
     display: 'flex',
-    alignItems: 'center',
-    width: 190,
+    alignItems: 'center'
 }
 
 const styles = {
     root: {
-        ...root,
+        ...root
     },
     rootDisabled: {
         ...root,
@@ -50,10 +49,10 @@ const styles = {
             color: "#ff00",
             fontWeight: 600
         },
-        color: '#ffffff',
-        backgroundColor: '#000000',
+        color: white,
+        backgroundColor: black,
         '& li[data-focus="true"]': {
-            backgroundColor: '#8D8E8D',
+            backgroundColor: 'var(--color-nero)',
             cursor: 'pointer',
         },
         '&::-webkit-scrollbar': {
@@ -61,11 +60,11 @@ const styles = {
             height: '10px'
         },
         '&::-webkit-scrollbar-corner': {
-          backgroundColor: '#000000'
-        },   
+            backgroundColor: '#000000'
+        },
         '&::-webkit-scrollbar-track': {
             backgroundColor: '#000000'
-        },          
+        },
         '&::-webkit-scrollbar-thumb': {
             backgroundColor: '#8d8e8d',
             borderRadius: '5px',
@@ -73,8 +72,8 @@ const styles = {
         }
     },
     noOptions: {
-        color: '#ffffff',
-        backgroundColor: '#000000'
+        color: white,
+        backgroundColor: black,
     },
     input: {
         color: white,
@@ -96,28 +95,33 @@ const styles = {
     }
 };
 
-function Dropdown({ classes, id, placeholder, loading, value, onChange, disabled, error, helperText, onOpen=()=>{}, onClose=()=>{}, type, ...other }) {
+function Dropdown({ classes, id, placeholder, loading, value = '', onChange, disabled, disableClearable, error, helperText, onOpen=()=>{}, onClose=()=>{}, type, ...other }) {
     let rootClass = classes.root;
-    if(error && disabled)
+
+    if (error && disabled) {
         rootClass = classes.rootDisabledError;
-    else if(error) {
+    } else if (error) {
         rootClass = classes.rootError;
-    }
-    else if(disabled) {
+    } else if (disabled) {
         rootClass = classes.rootDisabled;
     }
 
+    const [currentValue, setCurrentValue] = useState(value);
     const [currentPlaceholder, setCurrentPlaceholder] = useState(placeholder);
 
     useEffect(() => {
+        setCurrentValue(value);
+    }, [value]);
+
+    useEffect(() => {
         setCurrentPlaceholder(placeholder);
-    }, [placeholder])
+    }, [placeholder]);
 
     return (
         <div className='MdsCmp drop-down-container'>
             <Autocomplete
                 id={id}
-                disableClearable
+                disableClearable={disableClearable}
                 selectOnFocus
                 classes={{
                     inputRoot: classes.inputRoot,
@@ -138,21 +142,23 @@ function Dropdown({ classes, id, placeholder, loading, value, onChange, disabled
                 }}
                 onKeyDown={(e)=>{
                     if(e.code==='Enter'){
-                      var input = document.querySelector(`#${id}`);
-                      if(input!==null)
-                        input.blur()
-                        input.focus()
-                    }}}
+                        var input = document.querySelector(`#${id}`);
+                        if(input!==null) {
+                            input.blur()
+                            input.focus()
+                        }
+                    }}
+                }
                 loading={loading}
                 onInputChange={onChange}
-                value={value}
+                value={currentValue}
                 getOptionSelected={(opt,val) =>val.length===0?true:opt===val}
                 renderInput={(params) =>
                     <TextField
                         {...params}
                         disabled={disabled}
                         placeholder={currentPlaceholder}
-                        value={value}
+                        value={currentValue}
                         InputProps={{
                             ...params.InputProps,
                             disableUnderline: true,
@@ -166,7 +172,7 @@ function Dropdown({ classes, id, placeholder, loading, value, onChange, disabled
                     />}
 
             />
-            <Label color="invalid" size="small" disabled={disabled}>
+            <Label color='invalid' size='small' disabled={disabled}>
                 {error && helperText}
             </Label>
         </div>

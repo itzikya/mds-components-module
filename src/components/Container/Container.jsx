@@ -4,7 +4,7 @@ import Label from '../Label/Label.jsx';
 
 import React from 'react';
 
-function Container({ children, header, position, color, size, disabled, orientation="horizontal", style, contentStyle }) {
+function Container({ children, header, position, color, size, disabled = false, orientation='horizontal', style, contentStyle }) {
     const className = `MdsCmp MdsContainer-content MdsContainer-content-orientation-${orientation}`
 
     return (

@@ -8,7 +8,7 @@ import VolumeIcon from '../../assets/volume-icon.svg';
 
 import React from 'react';
 
-const Button = ({ text, icon, orientation = 'horizontal', disabled, color = 'primary', label, type = 'mds', style, buttonStyle, onClick, ...other }) => {
+const Button = ({ text, icon, orientation = 'horizontal', disabled, color = 'primary', label, type = 'mds', style, buttonStyle, onClick = () => {}, ...other }) => {
     const className = `MdsCmp MdsInput MdsButton MdsButton-type-${type} ${type === 'mds'?`MdsButton-color-${color}`:''} ${disabled ? 'MdsInput-disabled' : ''}`;
 
     const renderButtonType = () => {
@@ -32,7 +32,6 @@ const Button = ({ text, icon, orientation = 'horizontal', disabled, color = 'pri
                         <img alt='' src={VolumeIcon} style={{height: '70%'}}/>
                     </div>
                 )
-
             case 'icon':
                 return <img alt='' src={icon}/>
 
@@ -46,7 +45,7 @@ const Button = ({ text, icon, orientation = 'horizontal', disabled, color = 'pri
             <button className={className} disabled={disabled} onClick={onClick} style={buttonStyle} {...other}>
                 {renderButtonType()}
             </button>
-            <Label color="secondary" onClick={onClick} style={{alignItems: "center", cursor:disabled?'default':'pointer'}} disabled={disabled} >
+            <Label color="secondary" onClick={onClick} style={{alignItems: 'center', cursor:disabled?'default':'pointer'}} disabled={disabled} >
                 {label}
             </Label>
         </div>

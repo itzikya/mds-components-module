@@ -20,12 +20,12 @@ function Textfield({ disabled, type = '', onChange = () => {}, id, placeholder, 
 
     const handleChange = (e) => {
         setVal(e.target.value);
-        onChange(e);
+        onChange(e, e.target.value);
     }
 
     return (
         <>
-            <input className={className} id={id} value={value} placeholder={holder} disabled={disabled} onChange={handleChange} {...other}/>
+            <input className={className} id={id} value={val || ''} placeholder={holder} disabled={disabled} onChange={handleChange} {...other}/>
             <Label color='invalid' size='small'>
                 {error && helperText}
             </Label>
