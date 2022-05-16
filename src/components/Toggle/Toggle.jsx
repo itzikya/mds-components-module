@@ -3,7 +3,7 @@ import '../../styles.sass';
 
 import React, { useEffect, useState } from 'react';
 
-function Toggle({ id, isChecked = false, onChange = () => {}, color = 'primary', size = 'large', disabled, style }) {
+function Toggle({ id, isChecked = false, onChange = () => {}, color = 'primary', size = 'large', disabled, style, controlled }) {
     const [isToggled, setIsToggled] = useState(isChecked);
     const onToggle = () => {
         onChange(!isToggled);
@@ -22,7 +22,7 @@ function Toggle({ id, isChecked = false, onChange = () => {}, color = 'primary',
             <input id={id}
                    className='MdsToggle-input'
                    type='checkbox'
-                   checked={isToggled}
+                   checked={controlled?isChecked:isToggled}
                    onChange={() => {}}
             />
             <label htmlFor={id}

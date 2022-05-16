@@ -95,7 +95,7 @@ const styles = {
     }
 };
 
-function Dropdown({ classes, id, placeholder, loading, value = '', onChange, disabled, disableClearable, error, helperText, onOpen=()=>{}, onClose=()=>{}, type, ...other }) {
+function Dropdown({ classes, id, placeholder, loading, value = '', onChange, disabled, disableClearable, error, helperText, onOpen=()=>{}, onClose=()=>{}, type, controlled, ...other }) {
     let rootClass = classes.root;
 
     if (error && disabled) {
@@ -151,14 +151,14 @@ function Dropdown({ classes, id, placeholder, loading, value = '', onChange, dis
                 }
                 loading={loading}
                 onInputChange={onChange}
-                value={currentValue}
+                value={controlled?value:currentValue}
                 getOptionSelected={(opt,val) =>val.length===0?true:opt===val}
                 renderInput={(params) =>
                     <TextField
                         {...params}
                         disabled={disabled}
                         placeholder={currentPlaceholder}
-                        value={currentValue}
+                        value={controlled?value:currentValue}
                         InputProps={{
                             ...params.InputProps,
                             disableUnderline: true,
