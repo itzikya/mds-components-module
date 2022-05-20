@@ -23,3 +23,7 @@ Installing all packages for both the library and the example.
 ### `npm run build`
 
 Create bundled output to the build dir.
+
+### `npm run publish`
+
+Build and publish npm module.

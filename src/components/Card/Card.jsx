@@ -2,7 +2,7 @@ import './Card.sass';
 import '../../styles.sass';
 
 import React from 'react';
-import Button from '../Button/Button';
+import Button from '../Button/Button.jsx';
 
 function Card({ children, id, closeable, color = 'primary', type = 'round', size = 'medium', orientation = 'horizontal', disabled, onExitClick = () => {}, style }) {
     const className = `MdsCmp MdsCard MdsCard-color-${color} MdsCard-type-${type} MdsCard-orientation-${orientation} MdsCard-size-${size} ${disabled ? 'MdsInput-disabled' : ''}`;

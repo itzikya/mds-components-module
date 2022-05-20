@@ -43,7 +43,8 @@
         "i-all": "npm i && cd example && npm i",
         "dev": "npm-run-all --parallel build-watch start-example",
         "storybook": "start-storybook -p 6006",
-        "storybook:export": "build-storybook"
+        "storybook:export": "build-storybook",
+        "publish": "npm run build && npm publish ./"
     },
     "dependencies": {
         "@testing-library/jest-dom": "^5.14.1",
